@@ -1,5 +1,5 @@
 # CS374 Hotel Database Final Report
-*your names*
+By: Alex Douglas, Danny Ramos
 
 ## ER Model
 *insert the image here*
