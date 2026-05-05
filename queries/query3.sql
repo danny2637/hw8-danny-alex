@@ -52,7 +52,7 @@ NightlyCost AS (
 ),
 
 ServiceCharges AS (
-    SELECT GROUP_CONCAT(Services.Name SEPARATOR ', ') AS ServicesUsed,
+    SELECT STRING_AGG(Services.Name, ', ')            AS ServicesUsed,
            SUM(ServiceUsage.PriceCharged)             AS ServiceTotal
     FROM   ServiceUsage
     JOIN   Services ON Services.ServiceID = ServiceUsage.ServiceID

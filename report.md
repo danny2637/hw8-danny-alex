@@ -26,7 +26,8 @@ By: Alex Douglas, Danny Ramos
 
 *Describe any changes very briefly: for example:*
 
-[maybe add if not delete]
+Following the changes with the relational and ER model, 
+    we added additional drops and create for occupants
 
 ## Data
 *Link the files here*
@@ -37,34 +38,52 @@ By: Alex Douglas, Danny Ramos
 
 *Describe any changes very briefly: for example:*
 
-[maybe add if not delete]
+Added additional data to support with writing the queries, also more since we changed data in our
+    models and create/drop/alter
 
 ## Queries
 
-### Query 1
-*Link the code file(s) here from subdirectory queries*
+### Query 1: Reservations
+- [query1.sql](./queries/query1.sql)
 
-For example:
-- [workshop_leader.py](./queries/workshop_leader.py)
+A new Gold guest wants to reserve a room at Sunrise Hotel (Hotel A) from July 15–17, 2026. The SELECT returns all available room types for those two nights along with the average Gold-discounted nightly cost. We used a Summer 2026 season for Sunrise Hotel so the dates fall within a valid season, and all three Suite rooms are pre-booked by another reservation to ensure at least one room type comes back unavailable. The price differs between the two nights since July 15 is a Wednesday and July 16 is a Thursday, which have different rates in our data. The INSERT adds the new guest Alex Thompson and books him into a Double room for those dates.
 
-*Describe the queries in detail with screenshots of the data setup and the results*
+*insert screenshot of SELECT results and data setup here*
 
-### Query 2
-*Link the code file(s) here from subdirectory queries*
+![Query 1 Result](./images/query1-ss.png)
 
-*Describe the queries in detail with screenshots of setup and results*
+### Query 2: Checking In
+- [query2.sql](./queries/query2.sql)
 
-### Query 3
-*Link the code file(s) here from subdirectory queries*
+Mr. and Mrs. Smith arrive at Grand Hotel (Hotel B) on May 4, 2026 for their Double room reservation. The SELECT returns all Double room numbers at Grand Hotel that are currently unoccupied. We pre-inserted James Lee into the Occupies table for room 201 so that room is excluded from the results, leaving rooms 202 and 203 as available. The INSERTs add Mr. Robert Smith as a new occupant under Mrs. Smith's guest record, assign room 202 to her reservation, link Mr. Smith to that assignment, and record Mrs. Smith as physically occupying the room.
 
-*Describe the queries in detail with screenshots of setup and results*
+*insert screenshot of SELECT results and data setup here*
 
-### Query 4
-*Link the code file(s) here from subdirectory queries*
+![Query 2 Result](./images/query2-ss.png)
 
-*Describe the queries in detail with screenshots of setup and results*
+### Query 3: Checking Out
+- [query3.sql](./queries/query3.sql)
 
-### Query 5
-*Link the code file(s) here from subdirectory queries*
+Two nights later (May 6, 2026), the Smiths check out. We added a Spring 2026 season for Grand Hotel since no existing season covered May 2026, and set Monday at $150 and Tuesday at $165 so the nightly price varies across the stay. The INSERT adds a Room Service charge ($30) to the reservation. The UPDATE closes out the room assignment with a checkout timestamp, the DELETE removes Mrs. Smith from Occupies, and the final INSERT records the invoice. The SELECT generates the billing statement showing the date range, room type, services used, and the total cost with Mrs. Smith's Gold discount applied — coming out to $313.50.
 
-*Describe the queries in detail with screenshots of setup and results*
+*insert screenshot of SELECT results and data setup here*
+
+![Query 3 Result](./images/query3-ss.png)
+
+### Query 4: Find the Occupants
+- [query4.sql](./queries/query4.sql)
+
+This query finds everyone staying in a specific room on a specific date. Both the guest who made the reservation and any registered occupants. We use Hotel 1 room 101 on July 2, 2025 as the example, which returns three people: Maria Garcia (the reserver), Pedro Garcia, and Lucia Garcia. The query uses UNION ALL to combine the reserver from the Guest table with occupant names from OccupantAssignment, both filtered by matching the room assignment for that date.
+
+*insert screenshot of SELECT results here*
+
+![Query 4 Result](./images/query4-ss.png)
+
+### Query 5: Total Spending Over a Year
+- [query5.sql](./queries/query5.sql)
+
+This query finds the total amount spent at the chain for any guest who made at least 2 reservations across at least 2 different hotels in a given year.
+
+*insert screenshot of SELECT results here*
+
+![Query 5 Result](./images/query5-ss.png)
