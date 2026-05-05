@@ -6,7 +6,7 @@ By: Alex Douglas, Danny Ramos
 
 __OUR CHANGES__
 
-
+So we actually made a lot of changes to our new EER model going into HW8 since we basically scraped our old HW7 EER model and completely remodeled it after our new HW8 realtional model. With that being said I just want to cover over the major/things of importance that we changed. The biggest change is that we added the new occupant_assignment relationship between Occupant and RoomAssignment, which is something that is talked a little further into detail in the relational model section of the report. We also moved ((Features)) over to Hotel because in our old model we had it on RoomType which didnt really make sense. Features like a pool or a gym is something the hotel has, not the room type. Another big change is that we turned a few of our old entities into relationships instead. RoomPrice used to be its own entity but really it just describes pricing between a Season and a RoomType, so we made it a relationship called priced_at. We did the same thing with ReservationRoomRequest, now its just requests in our new EER model, and ServiceUsage, which is now the uses relationship. We also changed Occupant by making it a weak entity with OccupantName as a partial key instead of giving it its own ID, and we did this because an occupant only really exists if theres a guest tied to it.
 
 ## Relational Model
 ![HW8 Updated Hotel EER Diagram](./images/hw8UpdatedRelationalModel.png)
