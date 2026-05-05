@@ -223,21 +223,67 @@ INSERT INTO ServiceUsage (ReservationID, ServiceID, Quantity, PriceCharged) VALU
 (10, 11, 2, 44.00);
 
 INSERT INTO Invoice (InvoiceID, ReservationID, IssueDate, TotalAmount) VALUES
-(1, 1, '2025-07-13', 620.00),
-(2, 2, '2025-07-03', 185.20),
-(3, 3, '2025-06-22', 710.00),
-(4, 5, '2025-08-06', 142.10),
-(5, 9, '2025-07-22', 555.20),
-(6, 10, '2025-08-12', 300.50);
+(1, 1,  '2025-07-13', 606.50),
+(2, 2,  '2025-07-03', 187.00),
+(3, 3,  '2025-06-22', 690.00),
+(4, 5,  '2025-08-06', 138.50),
+(5, 9,  '2025-07-22', 557.00),
+(6, 10, '2025-08-12', 291.50);
 
 INSERT INTO OccupantAssignment (AssignmentID, GuestUID, OccupantName) VALUES
-(1, 1, 'Jane Smith'),
-(2, 2, 'Pedro Garcia'),
-(2, 2, 'Lucia Garcia'),
-(7, 2, 'Pedro Garcia'),
-(7, 2, 'Lucia Garcia'),
-(8, 1, 'Jane Smith'),
-(9, 5, 'Ana Rivera'),
-(13, 7, 'Tom Brown'),
-(13, 7, 'Lisa Brown'),
+(1,  1,  'Jane Smith'),
+(2,  2,  'Pedro Garcia'),
+(2,  2,  'Lucia Garcia'),
+(7,  2,  'Pedro Garcia'),
+(7,  2,  'Lucia Garcia'),
+(8,  1,  'Jane Smith'),
+(9,  5,  'Ana Rivera'),
+(10, 5,  'Ana Rivera'),
+(13, 7,  'Tom Brown'),
+(13, 7,  'Lisa Brown'),
 (14, 10, 'Raj Patel');
+
+------ Q1 support data -------------------------------------------------------
+-- Summer 2026 season for Sunrise Hotel so July 15-17, 2026 has valid prices.
+INSERT INTO Season (SeasonID, HotelUID, Name, StartDate, EndDate) VALUES
+(11, 1, 'Summer', '2026-06-01', '2026-08-31');
+
+-- Prices for Summer 2026 at Sunrise Hotel (same tiers as Summer 2025).
+-- July 15 = Wednesday ($90/$130/$250), July 16 = Thursday ($95/$140/$270) —
+-- prices differ across the two nights, satisfying the day-of-week requirement.
+INSERT INTO RoomPrice (SeasonID, TypeID, DayOfTheWeek, Price) VALUES
+(11, 11, 'Monday', 90.00),  (11, 11, 'Tuesday', 90.00),  (11, 11, 'Wednesday', 90.00),
+(11, 11, 'Thursday', 95.00),(11, 11, 'Friday', 120.00),  (11, 11, 'Saturday', 130.00),(11, 11, 'Sunday', 100.00),
+(11, 12, 'Monday', 130.00), (11, 12, 'Tuesday', 130.00), (11, 12, 'Wednesday', 130.00),
+(11, 12, 'Thursday', 140.00),(11, 12, 'Friday', 170.00), (11, 12, 'Saturday', 190.00),(11, 12, 'Sunday', 150.00),
+(11, 13, 'Monday', 250.00), (11, 13, 'Tuesday', 250.00), (11, 13, 'Wednesday', 250.00),
+(11, 13, 'Thursday', 270.00),(11, 13, 'Friday', 320.00), (11, 13, 'Saturday', 350.00),(11, 13, 'Sunday', 280.00);
+
+-- Reservation 13: James Lee (GuestUID=3) pre-books all 3 Suite rooms at
+-- Sunrise Hotel for July 15-17, 2026, making Suite unavailable for the query.
+INSERT INTO Reservation (ReservationID, GuestUID, Check_In_Date, Check_Out_Date, Address, HomePhone, MobilePhone)
+VALUES (13, 3, '2026-07-15', '2026-07-17', '789 Pine Rd, NY', '718-111-1111', '718-222-2222');
+
+INSERT INTO ReservationRoomRequest (ReservationID, TypeID, Quantity)
+VALUES (13, 13, 3);
+
+INSERT INTO RoomAssignment (AssignmentID, ReservationID, TypeID, HotelUID, RoomNumber, startDateTime, endDateTime) VALUES
+(17, 13, 13, 1, 301, '2026-07-15 15:00:00', '2026-07-17 11:00:00'),
+(18, 13, 13, 1, 302, '2026-07-15 15:00:00', '2026-07-17 11:00:00'),
+(19, 13, 13, 1, 303, '2026-07-15 15:00:00', '2026-07-17 11:00:00');
+
+------ Q2 support data -------------------------------------------------------
+-- Mrs. Elizabeth Smith has a reservation for a Double at Grand Hotel today.
+-- James Lee (GuestUID=3) is currently in room 201, so it is excluded from results.
+
+INSERT INTO Guest (GuestUID, CategoryID, Name, Identification, Address, HomePhone, MobilePhone)
+VALUES (12, 2, 'Elizabeth Smith', 'NY321', '10 Park Ave, NY', '212-777-1111', '212-777-2222');
+
+INSERT INTO Reservation (ReservationID, GuestUID, Check_In_Date, Check_Out_Date, Address, HomePhone, MobilePhone)
+VALUES (15, 12, '2026-05-04', '2026-05-05', '10 Park Ave, NY', '212-777-1111', '212-777-2222');
+
+INSERT INTO ReservationRoomRequest (ReservationID, TypeID, Quantity)
+VALUES (15, 22, 1);
+
+INSERT INTO Occupies (GuestUID, HotelUID, RoomNumber)
+VALUES (3, 2, 201);
