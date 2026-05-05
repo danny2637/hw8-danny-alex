@@ -23,17 +23,15 @@ So the problem that we ran into with our old implementation of the HW7 relationa
 
 __OUR CHANGES__
 
-Following the changes with the relational and ER model, 
-    we added additional drops and create for occupants
+Since all we really changed to our new relational model was adding the relationship to Occupant and RoomAssignment as mentioned above, we really did not have to change much to our data base scripts. For our new create script we only had to add one new CREATE TABLE line at the end for our new OccupantAssignment table. We also added a DROP TABLE line for it at the top. For our new alter script that adds the foreign key contraints, we only had to add two new foreign key constraints at the end. One that links AssignmentID to the RoomAssignment table and the other one links the composite key of GuestUID and OccupantName to the Occupant table. Now lastly, for our new drop script, that drops the foriegn key contraints, we only had to add two new DROP CONSTRAINT statements at the end to match the two new foreign keys we added in the add script. That's it.
 
 ## Data
 
 - Add some data from sql files: [load.sql](./data/load.sql)
 
-*Describe any changes very briefly: for example:*
+__OUR CHANGES__
 
-Added additional data to support with writing the queries, also more since we changed data in our
-    models and create/drop/alter
+For our new load script, we only had to update one thing from our old hw7 load data script. We had to add one new INSERT block at the end for our new OccupantAssignment table that we talked about above that joins our Occupant and RoomAssignment entities. 
 
 ## Queries
 
