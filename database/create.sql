@@ -157,3 +157,9 @@ CREATE TABLE OccupantAssignment (
     OccupantName VARCHAR(100) NOT NULL,
     PRIMARY KEY (AssignmentID, GuestUID, OccupantName)
 );
+
+-- RoomAssignment's primary key is AssignmentID, so lookups by hotel and room
+-- number require a full table scan without this index. Queries 1 and 4 both
+-- filter RoomAssignment on HotelUID (and optionally RoomNumber), making this
+-- a high-value composite index.
+CREATE INDEX idx_roomassignment_hotel_room ON RoomAssignment (HotelUID, RoomNumber);
