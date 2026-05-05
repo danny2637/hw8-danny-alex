@@ -2,18 +2,16 @@
 By: Alex Douglas, Danny Ramos
 
 ## ER Model
-*insert the image here*
-![conference review EER](./images/ConferenceReviewEER.drawio.png)
+![HW8 Updated Hotel EER Diagram](./images/hw8UpdatedEERDiagram.png)
+
 *describe any changes since HW7*
+OUR CHANGES HERE
 
 ## Relational Model
-*insert the image(s) here*
-
-- Conference Review System: ![conference review relational model](./images/ConferenceReviewRelational-mysql.png)
-- madiSTEM System: ![madistem relational model - Workbench style](./images/madistem-relational.png)
-- madiSTEM System (dbdiagram style): ![madistem relational model - dbdiagram style](./images/schema.png)
+![HW8 Updated Hotel EER Diagram](./images/hw8UpdatedRelationalModel.png)
 
 *Describe any changes since HW7*
+OUR CHANGES HERE
 
 ## Database creation
 *Link the files here*
@@ -22,7 +20,6 @@ By: Alex Douglas, Danny Ramos
 - Create tables: [create.sql](./database/alter.sql)
 - Add constraints to tables: [alter.sql](./database/alter.sql)
 
-*They should be in a subdirectory called database*
 
 *Describe any changes very briefly: for example:*
 
@@ -30,11 +27,8 @@ Following the changes with the relational and ER model,
     we added additional drops and create for occupants
 
 ## Data
-*Link the files here*
 
 - Add some data from sql files: [load.sql](./data/load.sql)
-
-*They should be in a subdirectory called data*
 
 *Describe any changes very briefly: for example:*
 
