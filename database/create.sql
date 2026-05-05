@@ -19,19 +19,19 @@ CREATE TABLE Season (
 );
 
 CREATE TABLE RoomType (
-    TypeID   INT          NOT NULL,
-    HotelUID INT          NOT NULL,
-    Name     VARCHAR(50)  NOT NULL,
+    TypeID   INT         NOT NULL,
+    HotelUID INT         NOT NULL,
+    Name     VARCHAR(50) NOT NULL,
     Size     VARCHAR(50),
     Capacity INT,
     PRIMARY KEY (TypeID)
 );
 
 CREATE TABLE RoomPrice (
-    SeasonID      INT           NOT NULL,
-    TypeID        INT           NOT NULL,
-    DayOfTheWeek  VARCHAR(10)   NOT NULL,
-    Price         DECIMAL(10,2) NOT NULL,
+    SeasonID     INT           NOT NULL,
+    TypeID       INT           NOT NULL,
+    DayOfTheWeek VARCHAR(10)   NOT NULL,
+    Price        DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (SeasonID, TypeID, DayOfTheWeek)
 );
 
@@ -41,6 +41,12 @@ CREATE TABLE Room (
     TypeID     INT NOT NULL,
     Floor      INT,
     PRIMARY KEY (HotelUID, RoomNumber)
+);
+
+CREATE TABLE HotelFeature (
+    HotelUID INT          NOT NULL,
+    Feature  VARCHAR(100) NOT NULL,
+    PRIMARY KEY (HotelUID, Feature)
 );
 
 CREATE TABLE GuestCategory (
@@ -79,16 +85,16 @@ CREATE TABLE Reservation (
 );
 
 CREATE TABLE ReservationRoomRequest (
-    RequestID     INT NOT NULL,
     ReservationID INT NOT NULL,
     TypeID        INT NOT NULL,
     Quantity      INT NOT NULL DEFAULT 1,
-    PRIMARY KEY (RequestID)
+    PRIMARY KEY (ReservationID, TypeID)
 );
 
 CREATE TABLE RoomAssignment (
     AssignmentID  INT       NOT NULL,
-    RequestID     INT       NOT NULL,
+    ReservationID INT       NOT NULL,
+    TypeID        INT       NOT NULL,
     HotelUID      INT       NOT NULL,
     RoomNumber    INT       NOT NULL,
     startDateTime TIMESTAMP,
@@ -112,20 +118,11 @@ CREATE TABLE Services (
 );
 
 CREATE TABLE ServiceUsage (
-    UsageID       INT           NOT NULL,
     ReservationID INT           NOT NULL,
     ServiceID     INT           NOT NULL,
     Quantity      INT           NOT NULL DEFAULT 1,
     PriceCharged  DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (UsageID)
-);
-
-CREATE TABLE Feature_Type (
-    FeatureID INT          NOT NULL,
-    HotelUID  INT          NOT NULL,
-    TypeID    INT          NOT NULL,
-    Name      VARCHAR(100) NOT NULL,
-    PRIMARY KEY (FeatureID)
+    PRIMARY KEY (ReservationID, ServiceID)
 );
 
 CREATE TABLE Invoice (
@@ -134,4 +131,11 @@ CREATE TABLE Invoice (
     IssueDate     DATE          NOT NULL,
     TotalAmount   DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (InvoiceID)
+);
+
+CREATE TABLE OccupantAssignment (
+    AssignmentID INT          NOT NULL,
+    GuestUID     INT          NOT NULL,
+    OccupantName VARCHAR(100) NOT NULL,
+    PRIMARY KEY (AssignmentID, GuestUID, OccupantName)
 );
