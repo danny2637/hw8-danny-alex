@@ -272,13 +272,6 @@ INSERT INTO RoomAssignment (AssignmentID, ReservationID, TypeID, HotelUID, RoomN
 (18, 13, 13, 1, 302, '2026-07-15 15:00:00', '2026-07-17 11:00:00'),
 (19, 13, 13, 1, 303, '2026-07-15 15:00:00', '2026-07-17 11:00:00');
 
------- Q2 support data -------------------------------------------------------
--- Mrs. Elizabeth Smith has a two-night reservation for a Double at Grand Hotel
--- (May 4-6, 2026: Monday night + Tuesday night).
--- James Lee (GuestUID=3) is currently in room 201, so it is excluded from results.
--- Spring 2026 season added for Grand Hotel; Monday ($150) and Tuesday ($165) prices
--- deliberately differ to satisfy the day-of-week pricing requirement in Q3.
-
 INSERT INTO Guest (GuestUID, CategoryID, Name, Identification, Address, HomePhone, MobilePhone)
 VALUES (12, 2, 'Elizabeth Smith', 'NY321', '10 Park Ave, NY', '212-777-1111', '212-777-2222');
 
