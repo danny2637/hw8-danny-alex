@@ -11,7 +11,8 @@ OUR CHANGES HERE
 ![HW8 Updated Hotel EER Diagram](./images/hw8UpdatedRelationalModel.png)
 
 *Describe any changes since HW7*
-OUR CHANGES HERE
+
+So the problem that we ran into with our old implementation of the HW7 relational model was that we had no way to tell which occupants were staying in which rooms. The Occupant table just listed people tied to a guest, and RoomAssignment had which room each reservation got, but nothing linked them together. So to fix this we added a table to join them called OccupantAssignment since the relationship was many-to-many. It has AssignmentID as a foreign key to RoomAssignment, and GuestUID plus OccupantName as a composite foreign key to Occupant, with all three columns together as the primary key.
 
 ## Database creation
 *Link the files here*
