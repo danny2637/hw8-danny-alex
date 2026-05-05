@@ -26,20 +26,18 @@ By: Alex Douglas, Danny Ramos
 
 *Describe any changes very briefly: for example:*
 
-We changed the scripts to match updated model shown in previous section.
+[maybe add if not delete]
 
 ## Data
 *Link the files here*
 
-- Add some data from csv files: [load.sql](./data/load.sql)
-     - [room.csv](./data/room.csv)
-- Add some data from using Python and faker: [generate.py](./data/generate.py)
+- Add some data from sql files: [load.sql](./data/load.sql)
 
 *They should be in a subdirectory called data*
 
 *Describe any changes very briefly: for example:*
 
-We changed the data to facilitate the queries, as described in the following sections.  We also changed how we loaded the data for X, Y and Z to using insert statements rather than `faker`.
+[maybe add if not delete]
 
 ## Queries
 
