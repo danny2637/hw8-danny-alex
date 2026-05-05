@@ -273,17 +273,32 @@ INSERT INTO RoomAssignment (AssignmentID, ReservationID, TypeID, HotelUID, RoomN
 (19, 13, 13, 1, 303, '2026-07-15 15:00:00', '2026-07-17 11:00:00');
 
 ------ Q2 support data -------------------------------------------------------
--- Mrs. Elizabeth Smith has a reservation for a Double at Grand Hotel today.
+-- Mrs. Elizabeth Smith has a two-night reservation for a Double at Grand Hotel
+-- (May 4-6, 2026: Monday night + Tuesday night).
 -- James Lee (GuestUID=3) is currently in room 201, so it is excluded from results.
+-- Spring 2026 season added for Grand Hotel; Monday ($150) and Tuesday ($165) prices
+-- deliberately differ to satisfy the day-of-week pricing requirement in Q3.
 
 INSERT INTO Guest (GuestUID, CategoryID, Name, Identification, Address, HomePhone, MobilePhone)
 VALUES (12, 2, 'Elizabeth Smith', 'NY321', '10 Park Ave, NY', '212-777-1111', '212-777-2222');
 
 INSERT INTO Reservation (ReservationID, GuestUID, Check_In_Date, Check_Out_Date, Address, HomePhone, MobilePhone)
-VALUES (15, 12, '2026-05-04', '2026-05-05', '10 Park Ave, NY', '212-777-1111', '212-777-2222');
+VALUES (15, 12, '2026-05-04', '2026-05-06', '10 Park Ave, NY', '212-777-1111', '212-777-2222');
 
 INSERT INTO ReservationRoomRequest (ReservationID, TypeID, Quantity)
 VALUES (15, 22, 1);
 
 INSERT INTO Occupies (GuestUID, HotelUID, RoomNumber)
 VALUES (3, 2, 201);
+
+INSERT INTO Season (SeasonID, HotelUID, Name, StartDate, EndDate)
+VALUES (12, 2, 'Spring', '2026-03-01', '2026-05-31');
+
+INSERT INTO RoomPrice (SeasonID, TypeID, DayOfTheWeek, Price) VALUES
+(12, 22, 'Monday',    150.00),
+(12, 22, 'Tuesday',   165.00),
+(12, 22, 'Wednesday', 165.00),
+(12, 22, 'Thursday',  180.00),
+(12, 22, 'Friday',    210.00),
+(12, 22, 'Saturday',  230.00),
+(12, 22, 'Sunday',    170.00);
