@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 DROP TABLE IF EXISTS Invoice;
 DROP TABLE IF EXISTS ServiceUsage;
 DROP TABLE IF EXISTS OccupantAssignment;
@@ -15,3 +16,28 @@ DROP TABLE IF EXISTS Season;
 DROP TABLE IF EXISTS Guest;
 DROP TABLE IF EXISTS GuestCategory;
 DROP TABLE IF EXISTS Hotel;
+=======
+ALTER TABLE Season               DROP CONSTRAINT IF EXISTS fk_season_hotel;
+ALTER TABLE RoomType             DROP CONSTRAINT IF EXISTS fk_roomtype_hotel;
+ALTER TABLE RoomPrice            DROP CONSTRAINT IF EXISTS fk_roomprice_season;
+ALTER TABLE RoomPrice            DROP CONSTRAINT IF EXISTS fk_roomprice_type;
+ALTER TABLE Room                 DROP CONSTRAINT IF EXISTS fk_room_hotel;
+ALTER TABLE Room                 DROP CONSTRAINT IF EXISTS fk_room_type;
+ALTER TABLE Guest                DROP CONSTRAINT IF EXISTS fk_guest_category;
+ALTER TABLE Occupant             DROP CONSTRAINT IF EXISTS fk_occupant_guest;
+ALTER TABLE Reservation          DROP CONSTRAINT IF EXISTS fk_reservation_guest;
+ALTER TABLE ReservationRoomRequest DROP CONSTRAINT IF EXISTS fk_rrr_reservation;
+ALTER TABLE ReservationRoomRequest DROP CONSTRAINT IF EXISTS fk_rrr_type;
+ALTER TABLE RoomAssignment       DROP CONSTRAINT IF EXISTS fk_assignment_request;
+ALTER TABLE RoomAssignment       DROP CONSTRAINT IF EXISTS fk_assignment_room;
+ALTER TABLE Occupies             DROP CONSTRAINT IF EXISTS fk_occupies_guest;
+ALTER TABLE Occupies             DROP CONSTRAINT IF EXISTS fk_occupies_room;
+ALTER TABLE Services             DROP CONSTRAINT IF EXISTS fk_services_hotel;
+ALTER TABLE ServiceUsage         DROP CONSTRAINT IF EXISTS fk_serviceusage_reservation;
+ALTER TABLE ServiceUsage         DROP CONSTRAINT IF EXISTS fk_serviceusage_service;
+ALTER TABLE Feature_Type         DROP CONSTRAINT IF EXISTS fk_featuretype_hotel;
+ALTER TABLE Feature_Type         DROP CONSTRAINT IF EXISTS fk_featuretype_type;
+ALTER TABLE Invoice              DROP CONSTRAINT IF EXISTS fk_invoice_reservation;
+ALTER TABLE OccupantAssignment   DROP CONSTRAINT IF EXISTS fk_occupantassignment_assignment;
+ALTER TABLE OccupantAssignment   DROP CONSTRAINT IF EXISTS fk_occupantassignment_occupant;
+>>>>>>> 32ccefd (Updated relational sql scripts)
